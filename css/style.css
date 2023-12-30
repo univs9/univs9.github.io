@@ -1600,6 +1600,10 @@
 #post .article_copyright a:hover {
   text-decoration: underline;
 }
+p {
+  text-indent: 2em;
+  word-wrap: break-word;
+}
 html,
 body {
   width: 100%;
