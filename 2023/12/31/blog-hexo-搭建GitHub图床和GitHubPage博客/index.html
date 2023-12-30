@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>blog-hexo-搭建GitHub图床和GitHubPage博客 | univs9 ’ Blog</title>
+  <meta name="keywords" content=" blog , hexo ">
+  <meta name="description" content="blog-hexo-搭建GitHub图床和GitHubPage博客 | univs9 ’ Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于作者一个网络工程师。 一个安服工程师。 一个运维工程师。 写博客，养成良好的笔记习惯。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://univs9.github.io/about/index.html">
+<meta property="og:site_name" content="univs9 ’ Blog">
+<meta property="og:description" content="关于作者一个网络工程师。 一个安服工程师。 一个运维工程师。 写博客，养成良好的笔记习惯。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-30T16:52:11.384Z">
+<meta property="article:author" content="univs9">
+<meta property="article:tag" content="security,network">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/github.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="false" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>univs9</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/univs9"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(1)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="开发">
+            
+            开发
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  site_url"
+               
+               href="/about">关于</a>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="1">
+<input type="hidden" id="yelog_site_word_count" value="908">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blog</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 开发 "
+           href="/2023/12/31/blog-hexo-%E6%90%AD%E5%BB%BAGitHub%E5%9B%BE%E5%BA%8A%E5%92%8CGitHubPage%E5%8D%9A%E5%AE%A2/"
+           data-tag="blog,hexo"
+           data-author="univs9" >
+            <span class="post-title" title="blog-hexo-搭建GitHub图床和GitHubPage博客">blog-hexo-搭建GitHub图床和GitHubPage博客</span>
+            <span class="post-date" title="2023-12-31 01:42:10">2023/12/31</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-blog-hexo-搭建GitHub图床和GitHubPage博客" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">blog-hexo-搭建GitHub图床和GitHubPage博客</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>univs9</a></span>
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="开发">开发</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">blog</a>
+            
+            <a class="color5">hexo</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-12-31 01:43:39'>2023-12-31 01:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:908</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 安装环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC"><span class="toc-text">1.1. 软件版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-text">1.2. 软件安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-text">2. 博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Git%E9%85%8D%E7%BD%AE"><span class="toc-text">2.1. Git配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-GitHub%E9%85%8D%E7%BD%AE"><span class="toc-text">2.2. GitHub配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A"><span class="toc-text">2.2.1. 搭建图床</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E5%88%9B%E5%BB%BAGitHub-Page"><span class="toc-text">2.2.2. 创建GitHub Page</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-hexo%E9%85%8D%E7%BD%AE"><span class="toc-text">2.3. hexo配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-hexo%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE"><span class="toc-text">2.3.1. hexo初始配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-text">2.3.2. hexo主题配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E4%B8%AA%E4%BA%BA%E5%AE%9A%E5%88%B6"><span class="toc-text">2.3.3. 个人定制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-hexo%E6%8E%A8%E9%80%81%E9%85%8D%E7%BD%AE"><span class="toc-text">2.3.4. hexo推送配置</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 安装环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC"><span class="toc-text">1.1. 软件版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-text">1.2. 软件安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA"><span class="toc-text">2. 博客搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Git%E9%85%8D%E7%BD%AE"><span class="toc-text">2.1. Git配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-GitHub%E9%85%8D%E7%BD%AE"><span class="toc-text">2.2. GitHub配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A"><span class="toc-text">2.2.1. 搭建图床</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E5%88%9B%E5%BB%BAGitHub-Page"><span class="toc-text">2.2.2. 创建GitHub Page</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-hexo%E9%85%8D%E7%BD%AE"><span class="toc-text">2.3. hexo配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-hexo%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE"><span class="toc-text">2.3.1. hexo初始配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="toc-text">2.3.2. hexo主题配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E4%B8%AA%E4%BA%BA%E5%AE%9A%E5%88%B6"><span class="toc-text">2.3.3. 个人定制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-4-hexo%E6%8E%A8%E9%80%81%E9%85%8D%E7%BD%AE"><span class="toc-text">2.3.4. hexo推送配置</span></a></li></ol></li></ol></li></ol></div></p>
+<h1 id="1-安装环境"><a href="#1-安装环境" class="headerlink" title="1. 安装环境"></a>1. 安装环境</h1><h2 id="1-1-软件版本"><a href="#1-1-软件版本" class="headerlink" title="1.1. 软件版本"></a>1.1. 软件版本</h2><ul>
+<li>Windows 11</li>
+<li>Python 3.12.0</li>
+<li>node v20.10.0</li>
+<li>npm 10.2.3</li>
+<li>git version 2.43.0.windows.1</li>
+<li>typora</li>
+<li>vscode</li>
+<li>hexo-cli: 4.3.1</li>
+</ul>
+<h2 id="1-2-软件安装"><a href="#1-2-软件安装" class="headerlink" title="1.2. 软件安装"></a>1.2. 软件安装</h2><p>可以一直下一步。建议百度。</p>
+<h1 id="2-博客搭建"><a href="#2-博客搭建" class="headerlink" title="2. 博客搭建"></a>2. 博客搭建</h1><h2 id="2-1-Git配置"><a href="#2-1-Git配置" class="headerlink" title="2.1. Git配置"></a>2.1. Git配置</h2><p>在cmd打开。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 配置Git的用户、邮箱</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxxxx@gmail.com</span><br><span class="line">git config --list --global</span><br><span class="line"># 配置GitHub的ssh密钥</span><br><span class="line">ssh-keygen -t rsa -C &quot;xxxxx@gmail.com&quot;</span><br></pre></td></tr></table></figure>
+<p>一直回车，记住保存的路径，一般是C:\Users\用户&#x2F;.ssh&#x2F;id_rsa</p>
+<p>ssh密钥在pub文件里，需将里面的内容拷贝到github里。</p>
+<p>打开<a target="_blank" rel="noopener" href="https://github.com/settings/keys%E7%BD%91%E9%A1%B5%EF%BC%8CSSH">https://github.com/settings/keys网页，SSH</a> keys – new SSH Key。选Authentication keys。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 测试连通性</span><br><span class="line">ssh -T git@github.com</span><br><span class="line"># 输入yes</span><br><span class="line"># 可以看到如下结果：</span><br><span class="line">You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+
+<p>Git就配置完成。</p>
+<h2 id="2-2-GitHub配置"><a href="#2-2-GitHub配置" class="headerlink" title="2.2. GitHub配置"></a>2.2. GitHub配置</h2><h3 id="2-2-1-搭建图床"><a href="#2-2-1-搭建图床" class="headerlink" title="2.2.1. 搭建图床"></a>2.2.1. 搭建图床</h3><p><strong>创建图床repository。</strong></p>
+<ul>
+<li><p>打开<a target="_blank" rel="noopener" href="https://github.com/%E3%80%82">https://github.com/。</a></p>
+</li>
+<li><p>点击GitHub首页右上角的“+”，点击New repository。</p>
+</li>
+<li><p>在Repository name输入，tuchuang，拉到最下面创建。</p>
+</li>
+</ul>
+<hr>
+<p><strong>创建GitHub token。</strong></p>
+<ul>
+<li><p>打开<a target="_blank" rel="noopener" href="https://github.com/settings/tokens%E9%A1%B5%E9%9D%A2%EF%BC%8C%E7%82%B9%E5%87%BBPersonal">https://github.com/settings/tokens页面，点击Personal</a> access tokens (classic)，创建。</p>
+</li>
+<li><p>note写piclist-hexo，知道自己干嘛用的。</p>
+</li>
+<li><p>Expiration选No expiration，永不过期。</p>
+</li>
+<li><p>Select scopes仅勾选repo。</p>
+</li>
+<li><p>然后最下面创建，将token复制到piclist。</p>
+</li>
+</ul>
+<hr>
+<p><strong>配置piclist。</strong></p>
+<ul>
+<li><p>下载piclist。<a target="_blank" rel="noopener" href="https://piclist.cn/%E3%80%82">https://piclist.cn/。</a></p>
+</li>
+<li><p>打开piclist，点击图床 – GitHub。根据下图进行配置。</p>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20231231001826241.png" alt="image-20231231001826241"  />
+
+<ul>
+<li>配置完成后，在图床 – GitHub，点击设为默认图床。根据下图进行配置。</li>
+</ul>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20231231002207872.png" alt="image-20231231002207872" style="zoom:33%;" />
+
+<p><strong>配置typora</strong>。</p>
+<ul>
+<li>文件 – 偏好设置 – 图像。根据下图进行配置。</li>
+</ul>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20231231001518663.png" alt="image-20231231001518663"  />
+
+<h3 id="2-2-2-创建GitHub-Page"><a href="#2-2-2-创建GitHub-Page" class="headerlink" title="2.2.2. 创建GitHub Page"></a>2.2.2. 创建GitHub Page</h3><p><strong>创建博客repository</strong>。</p>
+<ul>
+<li><p>打开<a target="_blank" rel="noopener" href="https://github.com/%E3%80%82">https://github.com/。</a></p>
+</li>
+<li><p>点击GitHub首页右上角的“+”，点击New repository。</p>
+</li>
+<li><p>在Repository name输入，你的GitHub用户名.github.io，拉到最下面创建。</p>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20231231002606166.png" alt="image-20231231002606166" style="zoom: 50%;" />
+
+<h2 id="2-3-hexo配置"><a href="#2-3-hexo配置" class="headerlink" title="2.3. hexo配置"></a>2.3. hexo配置</h2><h3 id="2-3-1-hexo初始配置"><a href="#2-3-1-hexo初始配置" class="headerlink" title="2.3.1. hexo初始配置"></a>2.3.1. hexo初始配置</h3><p>选择一个目录，新建一个文件夹，在这里打开cmd。你也可以cd过去。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 安装hexo</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"># 查看版本</span><br><span class="line">hexo -v</span><br><span class="line"># 新建博客文件夹</span><br><span class="line">mkdir GithubPage</span><br><span class="line"># 进入文件夹</span><br><span class="line">cd GithubPage</span><br><span class="line"># 使用hexo初始化该文件夹作为博客</span><br><span class="line">hexo init</span><br><span class="line"># 安装依赖</span><br><span class="line">npm install</span><br><span class="line"># 创建静态页面</span><br><span class="line">hexo g</span><br><span class="line"># 打开web服务</span><br><span class="line">hexo s</span><br><span class="line"># 使用浏览器打开http://localhost:4000/</span><br></pre></td></tr></table></figure>
+
+<p>hexo显示成功，则hexo初始化配置完成。</p>
+<h3 id="2-3-2-hexo主题配置"><a href="#2-3-2-hexo主题配置" class="headerlink" title="2.3.2. hexo主题配置"></a>2.3.2. hexo主题配置</h3><p>我这里重新搭，主要是修改根目录_config.yml文件和themes文件夹。</p>
+<p>每次修改都要运行命令：<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</code>。</p>
+<p>参考CSDN博客。一篇很用心的博客。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/cat_bayi/article/details/128725230</span><br></pre></td></tr></table></figure>
+
+<p> 这里我使用了3-hexo主题，我觉得能够更好的展示与梳理知识体系。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 3-hexo下载安装</span><br><span class="line">https://yelog.org/2017/03/07/3-hexo/</span><br><span class="line"># 3-hexo使用说明</span><br><span class="line">https://yelog.org/2017/03/23/3-hexo-instruction/</span><br></pre></td></tr></table></figure>
+
+<p>首先下载主题，然后根据3-hexo的使用说明进行修改。</p>
+<p>篇幅所限，CSDN博客已经很详细了。一些需要关注的内容如下，可在使用说明找到。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#开启字数统计。在博客根目录下安装</span><br><span class="line">npm i hexo-wordcount --save</span><br><span class="line">#创建about。</span><br><span class="line">hexo new page &quot;about&quot;</span><br><span class="line">#开启gitalk评论系统</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-3-个人定制"><a href="#2-3-3-个人定制" class="headerlink" title="2.3.3. 个人定制"></a>2.3.3. 个人定制</h3><p>我针对主题的css文件themes\3-hexo\source\css\style.styl，添加了3行代码。</p>
+<p>使博文首行缩进，并自动换行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">  text-indent 2em</span><br><span class="line">  word-wrap break-word</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-4-hexo推送配置"><a href="#2-3-4-hexo推送配置" class="headerlink" title="2.3.4. hexo推送配置"></a>2.3.4. hexo推送配置</h3><p>安装命令<code>npm install hexo-deployer-git --save</code>。</p>
+<p>在根目录_config.yml文件内，修改。</p>
+<p><img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20231231005958467.png" alt="image-20231231005958467"></p>
+<p>每次都要使用命令<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>进行推送。</p>
+<p>推送完成后。</p>
+<p>在GitHub的博客repository，点击右边的小齿轮，点击Use your GitHub Pages website</p>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20231231010506430.png" alt="image-20231231010506430" style="zoom: 25%;" />
+
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20231231010554042.png" alt="image-20231231010554042" style="zoom: 25%;" />
+
+<p>至此，博客创建完成。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，好人一生平安，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '40b0c9460ad2caa59471',
+            clientSecret: 'd004d70e268ab7acf66725e3ae686871ec6c7366',
+            repo: 'univs9.github.io',
+            owner: 'univs9',
+            admin: ['univs9'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    © 2023 - 2024 univs9
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
