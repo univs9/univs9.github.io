@@ -24,7 +24,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/github.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/sublime.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -285,7 +285,7 @@
     </div>
     <div class="article-meta">
         
-        <span>字数:908</span>
+        <span>字数:910</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -344,11 +344,20 @@
 </ul>
 <h2 id="1-2-软件安装"><a href="#1-2-软件安装" class="headerlink" title="1.2. 软件安装"></a>1.2. 软件安装</h2><p>可以一直下一步。建议百度。</p>
 <h1 id="2-博客搭建"><a href="#2-博客搭建" class="headerlink" title="2. 博客搭建"></a>2. 博客搭建</h1><h2 id="2-1-Git配置"><a href="#2-1-Git配置" class="headerlink" title="2.1. Git配置"></a>2.1. Git配置</h2><p>在cmd打开。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 配置Git的用户、邮箱</span><br><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email &quot;xxxxx@gmail.com</span><br><span class="line">git config --list --global</span><br><span class="line"># 配置GitHub的ssh密钥</span><br><span class="line">ssh-keygen -t rsa -C &quot;xxxxx@gmail.com&quot;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext"># 配置Git的用户、邮箱
+git config --global user.name &quot;xxx&quot;
+git config --global user.email &quot;xxxxx@gmail.com
+git config --list --global
+# 配置GitHub的ssh密钥
+ssh-keygen -t rsa -C &quot;xxxxx@gmail.com&quot;</code></pre>
 <p>一直回车，记住保存的路径，一般是C:\Users\用户&#x2F;.ssh&#x2F;id_rsa</p>
 <p>ssh密钥在pub文件里，需将里面的内容拷贝到github里。</p>
 <p>打开<a target="_blank" rel="noopener" href="https://github.com/settings/keys%E7%BD%91%E9%A1%B5%EF%BC%8CSSH">https://github.com/settings/keys网页，SSH</a> keys – new SSH Key。选Authentication keys。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 测试连通性</span><br><span class="line">ssh -T git@github.com</span><br><span class="line"># 输入yes</span><br><span class="line"># 可以看到如下结果：</span><br><span class="line">You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext"># 测试连通性
+ssh -T git@github.com
+# 输入yes
+# 可以看到如下结果：
+You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</code></pre>
 
 <p>Git就配置完成。</p>
 <h2 id="2-2-GitHub配置"><a href="#2-2-GitHub配置" class="headerlink" title="2.2. GitHub配置"></a>2.2. GitHub配置</h2><h3 id="2-2-1-搭建图床"><a href="#2-2-1-搭建图床" class="headerlink" title="2.2.1. 搭建图床"></a>2.2.1. 搭建图床</h3><p><strong>创建图床repository。</strong></p>
@@ -407,24 +416,49 @@
 <img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20231231002606166.png" alt="image-20231231002606166" style="zoom: 50%;" />
 
 <h2 id="2-3-hexo配置"><a href="#2-3-hexo配置" class="headerlink" title="2.3. hexo配置"></a>2.3. hexo配置</h2><h3 id="2-3-1-hexo初始配置"><a href="#2-3-1-hexo初始配置" class="headerlink" title="2.3.1. hexo初始配置"></a>2.3.1. hexo初始配置</h3><p>选择一个目录，新建一个文件夹，在这里打开cmd。你也可以cd过去。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 安装hexo</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"># 查看版本</span><br><span class="line">hexo -v</span><br><span class="line"># 新建博客文件夹</span><br><span class="line">mkdir GithubPage</span><br><span class="line"># 进入文件夹</span><br><span class="line">cd GithubPage</span><br><span class="line"># 使用hexo初始化该文件夹作为博客</span><br><span class="line">hexo init</span><br><span class="line"># 安装依赖</span><br><span class="line">npm install</span><br><span class="line"># 创建静态页面</span><br><span class="line">hexo g</span><br><span class="line"># 打开web服务</span><br><span class="line">hexo s</span><br><span class="line"># 使用浏览器打开http://localhost:4000/</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext"># 安装hexo
+npm install -g hexo-cli
+# 查看版本
+hexo -v
+# 新建博客文件夹
+mkdir GithubPage
+# 进入文件夹
+cd GithubPage
+# 使用hexo初始化该文件夹作为博客
+hexo init
+# 安装依赖
+npm install
+# 创建静态页面
+hexo g
+# 打开web服务
+hexo s
+# 使用浏览器打开http://localhost:4000/</code></pre>
 
 <p>hexo显示成功，则hexo初始化配置完成。</p>
 <h3 id="2-3-2-hexo主题配置"><a href="#2-3-2-hexo主题配置" class="headerlink" title="2.3.2. hexo主题配置"></a>2.3.2. hexo主题配置</h3><p>我这里重新搭，主要是修改根目录_config.yml文件和themes文件夹。</p>
 <p>每次修改都要运行命令：<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</code>。</p>
 <p>参考CSDN博客。一篇很用心的博客。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://blog.csdn.net/cat_bayi/article/details/128725230</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext">https://blog.csdn.net/cat_bayi/article/details/128725230</code></pre>
 
 <p> 这里我使用了3-hexo主题，我觉得能够更好的展示与梳理知识体系。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 3-hexo下载安装</span><br><span class="line">https://yelog.org/2017/03/07/3-hexo/</span><br><span class="line"># 3-hexo使用说明</span><br><span class="line">https://yelog.org/2017/03/23/3-hexo-instruction/</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext"># 3-hexo下载安装
+https://yelog.org/2017/03/07/3-hexo/
+# 3-hexo使用说明
+https://yelog.org/2017/03/23/3-hexo-instruction/</code></pre>
 
 <p>首先下载主题，然后根据3-hexo的使用说明进行修改。</p>
 <p>篇幅所限，CSDN博客已经很详细了。一些需要关注的内容如下，可在使用说明找到。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#开启字数统计。在博客根目录下安装</span><br><span class="line">npm i hexo-wordcount --save</span><br><span class="line">#创建about。</span><br><span class="line">hexo new page &quot;about&quot;</span><br><span class="line">#开启gitalk评论系统</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext">#开启字数统计。在博客根目录下安装
+npm i hexo-wordcount --save
+#创建about。
+hexo new page &quot;about&quot;
+#开启gitalk评论系统</code></pre>
 
 <h3 id="2-3-3-个人定制"><a href="#2-3-3-个人定制" class="headerlink" title="2.3.3. 个人定制"></a>2.3.3. 个人定制</h3><p>我针对主题的css文件themes\3-hexo\source\css\style.styl，添加了3行代码。</p>
 <p>使博文首行缩进，并自动换行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">  text-indent 2em</span><br><span class="line">  word-wrap break-word</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight plaintext">p
+  text-indent 2em
+  word-wrap break-word</code></pre>
 
 <h3 id="2-3-4-hexo推送配置"><a href="#2-3-4-hexo推送配置" class="headerlink" title="2.3.4. hexo推送配置"></a>2.3.4. hexo推送配置</h3><p>安装命令<code>npm install hexo-deployer-git --save</code>。</p>
 <p>在根目录_config.yml文件内，修改。</p>
