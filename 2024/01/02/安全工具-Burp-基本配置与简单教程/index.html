@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>安全工具-Burp-基本配置与简单教程 | univs9 ’ Blog</title>
+  <meta name="keywords" content=" 安全工具 , Brup ">
+  <meta name="description" content="安全工具-Burp-基本配置与简单教程 | univs9 ’ Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="关于作者一个网络工程师。 一个安服工程师。 一个运维工程师。 写博客，养成良好的笔记习惯。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://univs9.github.io/about/index.html">
+<meta property="og:site_name" content="univs9 ’ Blog">
+<meta property="og:description" content="关于作者一个网络工程师。 一个安服工程师。 一个运维工程师。 写博客，养成良好的笔记习惯。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-30T16:52:11.384Z">
+<meta property="article:author" content="univs9">
+<meta property="article:tag" content="security,network">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/github.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="false" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>univs9</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/univs9"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(2)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="安全">
+            
+            安全
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="开发">
+            
+            开发
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  site_url"
+               
+               href="/about">关于</a>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="2">
+<input type="hidden" id="yelog_site_word_count" value="2.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>安全工具</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blog</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Brup</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 安全 "
+           href="/2024/01/02/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7-Burp-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%AE%80%E5%8D%95%E6%95%99%E7%A8%8B/"
+           data-tag="安全工具,Brup"
+           data-author="univs9" >
+            <span class="post-title" title="安全工具-Burp-基本配置与简单教程">安全工具-Burp-基本配置与简单教程</span>
+            <span class="post-date" title="2024-01-02 21:13:05">2024/01/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 开发 "
+           href="/2023/12/31/blog-hexo-%E6%90%AD%E5%BB%BAGitHub%E5%9B%BE%E5%BA%8A%E5%92%8CGitHubPage%E5%8D%9A%E5%AE%A2/"
+           data-tag="blog,hexo"
+           data-author="univs9" >
+            <span class="post-title" title="blog-hexo-搭建GitHub图床和GitHubPage博客">blog-hexo-搭建GitHub图床和GitHubPage博客</span>
+            <span class="post-date" title="2023-12-31 01:42:10">2023/12/31</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-安全工具-Burp-基本配置与简单教程" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">安全工具-Burp-基本配置与简单教程</h1>
+    
+    <div class="article-meta">
+        
+        
+        <span class="author"><a>univs9</a></span>
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="安全">安全</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">安全工具</a>
+            
+            <a class="color5">Brup</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-01-02 21:15:47'>2024-01-02 21:13</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-text">1. 软件下载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3"><span class="toc-text">2. 学习文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%BD%AF%E4%BB%B6%E6%98%BE%E7%A4%BA"><span class="toc-text">3. 软件显示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="toc-text">4. 代理配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">4.1. 内置浏览器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">4.2. 第三方浏览器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D"><span class="toc-text">5. 功能介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-Proxy"><span class="toc-text">5.1. Proxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-Target"><span class="toc-text">5.2. Target</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-Repeater"><span class="toc-text">5.3. Repeater</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-Intruder"><span class="toc-text">5.4. Intruder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-Dashboard"><span class="toc-text">5.5. Dashboard</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-text">1. 软件下载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3"><span class="toc-text">2. 学习文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E8%BD%AF%E4%BB%B6%E6%98%BE%E7%A4%BA"><span class="toc-text">3. 软件显示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="toc-text">4. 代理配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">4.1. 内置浏览器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E7%AC%AC%E4%B8%89%E6%96%B9%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">4.2. 第三方浏览器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D"><span class="toc-text">5. 功能介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-Proxy"><span class="toc-text">5.1. Proxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-Target"><span class="toc-text">5.2. Target</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-Repeater"><span class="toc-text">5.3. Repeater</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-Intruder"><span class="toc-text">5.4. Intruder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-Dashboard"><span class="toc-text">5.5. Dashboard</span></a></li></ol></li></ol></div></p>
+<h1 id="1-软件下载"><a href="#1-软件下载" class="headerlink" title="1. 软件下载"></a>1. 软件下载</h1><p>官网下载地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://portswigger.net/burp/releases</span><br></pre></td></tr></table></figure>
+
+<p>初学者应该是安装community社区版就行了。</p>
+<p>官网下载的最新安装包不需要java环境，已经内置了。</p>
+<p><img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20240102184728500.png" alt="image-20240102184728500"></p>
+<p>不建议汉化，自己下个百度翻译PC版，截图翻译，慢慢克服英语困难。</p>
+<p>该文章使用软件版本为community 2023.12.1。</p>
+<h1 id="2-学习文档"><a href="#2-学习文档" class="headerlink" title="2. 学习文档"></a>2. 学习文档</h1><p>我喜欢看官方的文档进行学习，getting-started是入门的好文档。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://portswigger.net/burp/documentation/desktop/getting-started</span><br></pre></td></tr></table></figure>
+
+<p>还有YouTube视频教程，可以使用字幕翻译功能，英语基础稍微好一点的都能够理解。</p>
+<h1 id="3-软件显示"><a href="#3-软件显示" class="headerlink" title="3. 软件显示"></a>3. 软件显示</h1><p>存在高清屏幕导致的字体模糊、字体过小、ui强迫症等因素，第一次使用burp先解决显示问题。</p>
+<ul>
+<li>高清屏高DPI配置：桌面右键快捷方式 - 属性 - 兼容性 - 更改高DPI设置 - 高DPI缩放替代 ：应用程序。</li>
+</ul>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20240102163701626.png" alt="image-20240102163701626" style="zoom: 33%;" />
+
+<ul>
+<li><p>拦截器和消息编辑器的字体：右上角settings – user interface – inspector and message editor – HTTP message display – Font ：consolas 11pt</p>
+</li>
+<li><p>用户界面（菜单栏）的字体：右上角settings – user interface – display – appearance – Font size ：11</p>
+</li>
+<li><p>保存配置：右上角三点 - user setting - save ，保存json格式的配置。</p>
+</li>
+<li><p>默认使用json配置：关闭软件再次打开，选临时项目，在加载项目时选择你想要的配置，点击 load from configuration file ，选择你刚才保存的json文件， 再勾选 default to the above in future。</p>
+</li>
+</ul>
+<h1 id="4-代理配置"><a href="#4-代理配置" class="headerlink" title="4. 代理配置"></a>4. 代理配置</h1><p>使用Burp Suite，最重要的是能够捕获到HTTP流量，有两种方法：使用内置浏览器、第三方浏览器代理。</p>
+<h2 id="4-1-内置浏览器"><a href="#4-1-内置浏览器" class="headerlink" title="4.1. 内置浏览器"></a>4.1. 内置浏览器</h2><p>Proxy – Intercept – open browser。burp浏览器已预配置代理。</p>
+<h2 id="4-2-第三方浏览器"><a href="#4-2-第三方浏览器" class="headerlink" title="4.2. 第三方浏览器"></a>4.2. 第三方浏览器</h2><p>如谷歌浏览器。</p>
+<ul>
+<li><p>打开Burp Suite，右上角Settings  – Tools – Proxy –  proxy listeners，可以看到端口：8080。</p>
+</li>
+<li><p>安装谷歌浏览器插件：Proxy SwitchyOmega。</p>
+</li>
+<li><p>新建情景模式。</p>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20240102161327026.png" alt="image-20240102161327026" style="zoom:25%;" />
+
+<ul>
+<li>安装burp证书：浏览器输入<a target="_blank" rel="noopener" href="http://burp/">http://burp</a></li>
+</ul>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20240102160633287.png" alt="image-20240102160633287" style="zoom:25%;" />
+
+<ul>
+<li>右上角下载证书 – 打开安全证书 – 安装证书 – 选择受信任的根证书颁发机构。</li>
+</ul>
+<img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20240102162349927.png" alt="image-20240102162349927" style="zoom:25%;" />
+
+<ul>
+<li><p>浏览器现在可使用Burp Suite进行代理上网。</p>
+</li>
+<li><p>打开Burp Suite，查看第二行的Proxy – HTTP history，可以看到代理的流量。</p>
+</li>
+<li></li>
+<li><p>上游代理：setting - network - connections - Upstream proxy servers，配置翻墙软件的端口，让burp作为客户端再进行代理一次。</p>
+</li>
+</ul>
+<h1 id="5-功能介绍"><a href="#5-功能介绍" class="headerlink" title="5. 功能介绍"></a>5. 功能介绍</h1><h2 id="5-1-Proxy"><a href="#5-1-Proxy" class="headerlink" title="5.1. Proxy"></a>5.1. Proxy</h2><p>首先是代理，这里是核心的功能，可以使用intercept拦截器，拦截本机和目标服务器的HTTP流量，通过Forward、Drop、Action进行对HTTP包的研究分析。</p>
+<ul>
+<li><p>Intercept</p>
+<p>默认Intercept is off，开启拦截器Intercept is on，拦截访问目标server的流量。（如果你发现网络突然中断了，那应该就是Intercept is on。）</p>
+<p>使用forward转发流量到目标服务器，使用drop丢弃该请求包，使用action进行进一步研究分析，action如下图。</p>
+<p><img src="https://raw.githubusercontent.com/univs9/tuchuang/main/hexoimg/image-20240102192059905.png" alt="image-20240102192059905"></p>
+</li>
+<li><p>HTTP history</p>
+<p>HTTP历史记录显示了浏览器发出的每个请求的详细信息。</p>
+<p>点击左边的#，切换倒序，即可实时查看最新的流量。</p>
+<p>可以通过Filter settings进行过滤；可以右键highlight，选择某一条标记颜色，方便寻找。</p>
+<p>配置scope，在过滤配置里勾选only in-scope，可以使HTTP history更精简。</p>
+</li>
+<li><p>WebSockets history</p>
+<p>略。</p>
+</li>
+<li><p>Proxy setting</p>
+<p>配置正则表达式，match and replace rules，自动更换字符。</p>
+<p>配置拦截返回的信息：response interception rules  - intercept responses based on the following rules。</p>
+</li>
+<li><p>Inspector</p>
+<p>这个是一个便捷的包分析器，你可以根据HTTP的参数来修改对应的value。这与直接在request、response包里修改参数的值是一样的。</p>
+</li>
+</ul>
+<h2 id="5-2-Target"><a href="#5-2-Target" class="headerlink" title="5.2. Target"></a>5.2. Target</h2><p>在Target – Site map ，将HTTP流量归纳到了不同的站点（域名）。</p>
+<ul>
+<li>选择某站点右键add to scope。选择目标站点，作为本次分析工作的感兴趣URL范围。</li>
+<li>出现弹窗选择no。继续记录其他网页的访问流量。</li>
+<li>在scope setting – target scope，可以看到添加的URL。</li>
+<li>在HTTP history – Filter settings，勾选show only in-scope items，则仅显示感兴趣流量，减少多余的繁杂信息。</li>
+</ul>
+<h2 id="5-3-Repeater"><a href="#5-3-Repeater" class="headerlink" title="5.3. Repeater"></a>5.3. Repeater</h2><p>Burp Repeater 是一个工具，使您能够反复修改和发送有趣的 HTTP 或 WebSocket 消息。（应保证代理正常，这样才能抓取回包。）</p>
+<ul>
+<li>在HTTP history选择特定的HTTP包。</li>
+<li>右键add to repeater。</li>
+<li>在Repeater标签，修改某一参数，send。</li>
+<li>在send按钮右边，可以选择历史尝试的内容。</li>
+</ul>
+<h2 id="5-4-Intruder"><a href="#5-4-Intruder" class="headerlink" title="5.4. Intruder"></a>5.4. Intruder</h2><p>Burp Intruder 是一种针对 Web 应用程序自动执行定制攻击的工具。它使您能够配置多次发送相同 HTTP 请求的攻击，每次将不同的有效负载插入到预定义的位置。</p>
+<ul>
+<li><p>在HTTP history选择特定的HTTP包。</p>
+</li>
+<li><p>右键add to intrude。</p>
+</li>
+<li><p>设置Positions。</p>
+<p>主要界面，在右侧可以选择一个或多个参数进行攻击。</p>
+<p>可以选择攻击类型，根据payload，进行规则或不规则的攻击顺序。暂不展开，内容较多。</p>
+</li>
+<li><p>设置Payloads。设置攻击的参数值，可设置一组或多组的值。</p>
+</li>
+</ul>
+<h2 id="5-5-Dashboard"><a href="#5-5-Dashboard" class="headerlink" title="5.5. Dashboard"></a>5.5. Dashboard</h2><p>配置扫描任务。</p>
+<p>主动扫描（pro版）、被动扫描。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，好人一生平安，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '40b0c9460ad2caa59471',
+            clientSecret: 'd004d70e268ab7acf66725e3ae686871ec6c7366',
+            repo: 'univs9.github.io',
+            owner: 'univs9',
+            admin: ['univs9'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    © 2023 - 2024 univs9
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
